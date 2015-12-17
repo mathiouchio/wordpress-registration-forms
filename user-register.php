@@ -149,3 +149,15 @@ function myplugin_user_register( $user_id ) {
   //Remove username requirement
   $_POST['user_login'] = $_POST['user_email'];
 }
+
+// Enqueue scripts and styles
+add_action( 'admin_enqueue_scripts', 'enqueue_scripts_styles' );
+function cupp_enqueue_scripts_styles() {
+  // Register
+  wp_register_style( 'admin_css', plugins_url( 'style.css' ), false, '1.0.0', 'all' );
+  wp_register_script( 'admin_js', plugins_url( 'script.min.js' ), array('jquery'), '1.0.0', true );
+  
+  // Enqueue
+  wp_enqueue_style( 'admin_css' );
+  wp_enqueue_script( 'admin_js' );
+}
